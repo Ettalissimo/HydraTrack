@@ -1,12 +1,15 @@
 package com.example.hydratrack;
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+
+import com.example.hydratrack.MainActivity;
+import com.example.hydratrack.R;
 
 public class WaterReminderReceiver extends BroadcastReceiver {
     private static final String CHANNEL_ID = "water_reminder_channel";
@@ -17,6 +20,11 @@ public class WaterReminderReceiver extends BroadcastReceiver {
         // Create notification channel (required for Android Oreo and above)
         createNotificationChannel(context);
 
+        // Create intent to launch MainActivity
+        Intent mainIntent = new Intent(context, MainActivity.class);
+        mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, mainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         // Build the notification
         Notification.Builder builder = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -24,7 +32,8 @@ public class WaterReminderReceiver extends BroadcastReceiver {
                     .setContentTitle("Hydration Reminder")
                     .setContentText("Remember to drink water!")
                     .setSmallIcon(R.drawable.notifs_icon)
-                    .setAutoCancel(true);
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent); // Set the pending intent
         }
 
         // Show the notification
