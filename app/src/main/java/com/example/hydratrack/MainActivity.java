@@ -34,5 +34,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         WaterReminderScheduler.scheduleHourlyReminder(this);
+        Button notifyButton = findViewById(R.id.notifybutton);
+        notifyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WaterReminderReceiver.sendNotification(MainActivity.this);
+            }
+        });
     }
 }
