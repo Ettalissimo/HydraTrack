@@ -3,15 +3,21 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/skyBlue">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Titre suggestion"
-        android:textSize="30dp"
+        android:textAlignment="center"
         android:textColor="@color/black"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
         />
 
     <TextView
@@ -20,6 +26,9 @@
         android:layout_height="wrap_content"
         android:text="sous Titre suggestion"
         android:textSize="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
         android:textColor="@color/black"
         />
 
@@ -28,7 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OK"
-
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
         />
 
 </LinearLayout>
