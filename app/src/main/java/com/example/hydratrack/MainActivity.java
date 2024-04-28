@@ -2,6 +2,7 @@ package com.example.hydratrack;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 WaterReminderReceiver.sendNotification(MainActivity.this);
+            }
+        });
+        Button launchButton = findViewById(R.id.launch_button);
+        launchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Launch NotificationTestActivity
+                Intent intent = new Intent(MainActivity.this, NotificationTestActivity.class);
+                startActivity(intent);
             }
         });
     }

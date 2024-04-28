@@ -8,8 +8,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioAttributes;
+import android.net.Uri;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 
 
@@ -27,7 +30,12 @@ public class WaterReminderReceiver extends BroadcastReceiver {
                 .setContentTitle("Hydration Reminder")
                 .setContentText("Remember to drink water!")
                 .setSmallIcon(R.drawable.notifs_icon)
+                .setColor(ContextCompat.getColor(context, R.color.blue))
                 .setAutoCancel(true);
+
+        // Set custom sound for the notification
+        Uri soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.water_droplet);
+        builder.setSound(soundUri);
 
         // Create intent to launch MainActivity
         Intent mainIntent = new Intent(context, MainActivity.class);
@@ -44,11 +52,19 @@ public class WaterReminderReceiver extends BroadcastReceiver {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             CharSequence name = "Water Reminder Channel";
             String description = "Channel for water reminder notifications";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
             channel.enableLights(true);
             channel.setLightColor(Color.BLUE);
+
+            // Set custom sound for the notification channel
+            Uri soundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.water_droplet);
+            AudioAttributes attributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .build();
+            channel.setSound(soundUri, attributes);
+
             NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
