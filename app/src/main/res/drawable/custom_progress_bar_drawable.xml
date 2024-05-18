@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape android:innerRadiusRatio="3" android:shape="ring" android:thicknessRatio="8" android:useLevel="false" >
+            <size android:height="48dp" android:width="48dp" />
+            <gradient android:centerColor="#d1d1d1" android:endColor="#d1d1d1" android:startColor="#d1d1d1" android:type="sweep" android:useLevel="false" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <shape android:innerRadiusRatio="3" android:shape="ring" android:thicknessRatio="8" android:useLevel="false" >
+            <size android:height="48dp" android:width="48dp" />
+            <gradient android:centerColor="#4CAF50" android:endColor="#4CAF50" android:startColor="#4CAF50" android:type="sweep" android:useLevel="false" />
+        </shape>
+    </item>
+</layer-list>
