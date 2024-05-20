@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        auth = FirebaseAuth.getInstance() ;
+        /*auth = FirebaseAuth.getInstance() ;
         user = auth.getCurrentUser() ;
         if (user == null){
             Intent intent = new Intent(getApplicationContext(), Login.class) ;
@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             textView.setText(user.getEmail());
-        }
+        }*/
 
 
 
         //tester les suggestions
-        this.activity=this;
+        /*this.activity=this;
         this.button = findViewById(R.id.testSuggestion);
         button.setText("Suggestion");
         button.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 popup.build();
             }
         });
-        WaterReminderScheduler.scheduleHourlyReminder(this);
+        WaterReminderScheduler.scheduleHourlyReminder(this)*/;
     }
 }

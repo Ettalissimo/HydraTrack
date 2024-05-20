@@ -15,4 +15,5 @@
     <string name="select_your_age_weight_n_t_t_t_gender_and_height">Select your age , weight , \n \t \t \t gender and height</string>
     <string name="_07_00">07:00</string>
     <string name="_22_00">22:00</string>
+    <string name="save">Save</string>
 </resources>

@@ -9,8 +9,6 @@
     android:orientation="vertical"
     tools:context=".Login">
 
-    <?xml version="1.0" encoding="utf-8"?>
-
     <TextView
         android:id="@+id/login"
         android:layout_width="match_parent"
@@ -23,6 +21,22 @@
         android:textStyle="bold"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="105dp" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username"
+        android:layout_margin="10dp"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/baseline_email_24"
+        android:drawablePadding="20dp"
+        android:hint="@string/email"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="252dp" />
 
     <EditText
         android:id="@+id/password"
@@ -40,21 +54,6 @@
         tools:layout_editor_absoluteX="10dp"
         tools:layout_editor_absoluteY="327dp" />
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/username"
-        android:layout_margin="10dp"
-        android:background="#30ffffff"
-        android:drawableLeft="@drawable/baseline_email_24"
-        android:drawablePadding="20dp"
-        android:hint="@string/email"
-        android:padding="20dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="252dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"

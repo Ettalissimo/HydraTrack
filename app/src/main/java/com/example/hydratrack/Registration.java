@@ -26,8 +26,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class Registration extends AppCompatActivity {
 
 
-    EditText editTextemail ,editTextPassword ;
+    EditText editTextemail ,editTextPassword,editTextUsername;
     Button buttonReg ;
+
 
     FirebaseAuth mAuth ;
 
@@ -41,6 +42,7 @@ public class Registration extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         editTextemail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
+        editTextUsername = findViewById(R.id.username);
         buttonReg = findViewById(R.id.signupbtn);
         progressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.loginNow);
@@ -83,7 +85,7 @@ public class Registration extends AppCompatActivity {
                                     progressBar.setVisibility(View.GONE);
                                     // Sign in success, update UI with the signed-in user's information
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), DataForm.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
