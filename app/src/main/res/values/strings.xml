@@ -2,6 +2,20 @@
     <string name="app_name">Water_app</string>
     <string name="suggestions">Suggestions</string>
     <string name="settings">Settings</string>
-    <color name="background">#F7F7FF</color>
-    <color name="button">#5aceff</color>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="click_to_login">Click to Login</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="_0">0</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="choose_an_hour">Choose an Hour</string>
+    <string name="select_your_age_weight_gender_and_height">Select your age,weight, gender and height</string>
+    <string name="select_your_age_weight_n_t_t_t_gender_and_height">Select your age , weight , \n \t \t \t gender and height</string>
+    <string name="_07_00">07:00</string>
+    <string name="_22_00">22:00</string>
+    <string name="save">Save</string>
 </resources>
