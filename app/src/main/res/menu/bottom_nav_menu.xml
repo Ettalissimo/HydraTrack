@@ -20,6 +20,7 @@
         android:icon="@drawable/outline_access_alarm_24"
         />
     <item
+        android:id="@+id/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title="@string/settings"
