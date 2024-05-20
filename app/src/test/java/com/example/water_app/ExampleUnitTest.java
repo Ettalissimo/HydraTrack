@@ -1,4 +1,4 @@
-package com.example.hydratrack;
+package com.example.water_app;
 
 import org.junit.Test;
 

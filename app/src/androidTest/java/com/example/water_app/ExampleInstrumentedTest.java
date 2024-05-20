@@ -1,4 +1,4 @@
-package com.example.hydratrack;
+package com.example.water_app;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.hydratrack", appContext.getPackageName());
+        assertEquals("com.example.water_app", appContext.getPackageName());
     }
 }

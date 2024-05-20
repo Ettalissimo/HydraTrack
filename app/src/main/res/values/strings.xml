@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">HydraTrack</string>
+    <string name="app_name">Water_app</string>
+    <string name="suggestions">Suggestions</string>
+    <string name="settings">Settings</string>
+    <color name="background">#F7F7FF</color>
+    <color name="button">#5aceff</color>
 </resources>

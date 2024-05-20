@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "750058477542",
+    "firebase_url": "https://water-intake-database-default-rtdb.firebaseio.com",
+    "project_id": "water-intake-database",
+    "storage_bucket": "water-intake-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750058477542:android:cd2217f3e2ff95698ce827",
+        "android_client_info": {
+          "package_name": "com.example.tp1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX8G2EV6NZI_Ofm5l9hJT-61z6labMLzk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750058477542:android:cb610c69a73acedc8ce827",
+        "android_client_info": {
+          "package_name": "com.example.water_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX8G2EV6NZI_Ofm5l9hJT-61z6labMLzk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
