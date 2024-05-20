@@ -25,7 +25,7 @@ public class AddContainerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_container);
-        DatabaseReference containerReference = FirebaseDatabase.getInstance().getReference("Containers");
+        containerReference = FirebaseDatabase.getInstance().getReference("Containers");
         button = findViewById(R.id.button1);
         containerEditText = findViewById(R.id.nameInput);
         volumeEditText = findViewById(R.id.numberInput);
@@ -39,24 +39,34 @@ public class AddContainerActivity extends AppCompatActivity {
 
 
     }
-    private void insertData(){
-        String containerText = containerEditText.getText().toString();
-        if (containerText.isEmpty()) {
-            Toast.makeText(this, "Please enter an container name", Toast.LENGTH_SHORT).show();
+    private void insertData() {
+        String containerName = containerEditText.getText().toString().trim();
+        if (containerName.isEmpty()) {
+            Toast.makeText(this, "Please enter a container name", Toast.LENGTH_SHORT).show();
             return;
         }
-        String volumeText = volumeEditText.getText().toString();
-        int volumeInt = Integer.parseInt(volumeText);
+
+        String volumeText = volumeEditText.getText().toString().trim();
         if (volumeText.isEmpty()) {
             Toast.makeText(this, "Please enter a volume", Toast.LENGTH_SHORT).show();
             return;
         }
-        Container container = new Container(containerText,volumeInt);
+
+        int volume;
+        try {
+            volume = Integer.parseInt(volumeText);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Please enter a valid volume", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Container container = new Container(containerName, volume);
 
         containerReference.push().setValue(container)
-                .addOnSuccessListener( aVoid ->{
-                            Toast.makeText(AddContainerActivity.this,"Data inserted succesfully",Toast.LENGTH_SHORT).show();
-                        })
-                .addOnFailureListener(e->Toast.makeText(AddContainerActivity.this,"Failed to insert data",Toast.LENGTH_SHORT).show());
+                .addOnSuccessListener(aVoid ->
+                        Toast.makeText(AddContainerActivity.this, "Data inserted successfully", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e ->
+                        Toast.makeText(AddContainerActivity.this, "Failed to insert data", Toast.LENGTH_SHORT).show());
     }
+
 }

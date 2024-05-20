@@ -1,8 +1,10 @@
 package com.example.water_app;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +42,9 @@ public class AddWaterActivity extends AppCompatActivity implements AdapterView.O
     private Button button;
     private EditText amountEditText;
     private User user;
+    Button button1;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,7 @@ public class AddWaterActivity extends AppCompatActivity implements AdapterView.O
         containerSpinner = findViewById(R.id.container_spinner);
         amountEditText = findViewById(R.id.numberInput);
         button = findViewById(R.id.button);
+        button1 = findViewById(R.id.button1);
         containerList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -63,6 +68,13 @@ public class AddWaterActivity extends AppCompatActivity implements AdapterView.O
             public void onClick(View v) {
                 insertData();
             }
+        });
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(AddWaterActivity.this, AddContainerActivity.class);
+                startActivity(intent);
+        };
         });
 
         fetchContainers();

@@ -85,6 +85,19 @@
 
     </TextView>
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="50dp"
+        android:layout_height="49dp"
+        android:background="@drawable/baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/container_spinner"
+        app:layout_constraintTop_toTopOf="@+id/container_spinner"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
     <Spinner
         android:id="@+id/container_spinner"
         android:layout_width="300dp"
@@ -96,7 +109,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numberInput"
-        app:layout_constraintVertical_bias="0.573" />
+        app:layout_constraintVertical_bias="0.576" />
 
     <Button
         android:id="@+id/button"
