@@ -16,14 +16,30 @@
         android:layout_marginTop="28dp"
         android:backgroundTint="@color/white"
         android:clickable="true"
-        android:src="@drawable/bell_icon"
         android:scaleType="center"
-        app:fabCustomSize="46dp"
+        android:src="@drawable/bell_icon"
         app:borderWidth="0dp"
+        app:fabCustomSize="46dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintHorizontal_bias="0.938"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/notif_badge"
+        android:layout_width="14dp"
+        android:layout_height="16dp"
+        android:layout_alignTop="@id/floatingActionButton"
+        android:layout_alignRight="@id/floatingActionButton"
+        android:background="@drawable/notif_badge"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="390dp"
+        tools:layout_editor_absoluteY="19dp"
+        android:visibility="gone"
         tools:ignore="MissingConstraints" />
 
     <FrameLayout

@@ -45,6 +45,7 @@ public class WaterReminderReceiver extends BroadcastReceiver {
         // Show the notification
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
+        MainActivity.unreadNotificationsCount++;
     }
 
     private void createNotificationChannel(Context context) {
