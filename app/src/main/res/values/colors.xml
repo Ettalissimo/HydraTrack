@@ -11,5 +11,6 @@
     <color name="button">#5aceff</color>
     <color name="background">#F7F7FF</color>
     <color name="red">#FF0000</color>
+    <color name="skyBlue">#2596be</color>
 
 </resources>
