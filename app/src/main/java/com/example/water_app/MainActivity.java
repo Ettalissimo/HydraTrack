@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         TextView timeTextView = findViewById(R.id.textView);
         String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
         timeTextView.setText(currentTime);
+        WaterReminderScheduler.scheduleHourlyReminder(this);
         Button addButton = findViewById(R.id.button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

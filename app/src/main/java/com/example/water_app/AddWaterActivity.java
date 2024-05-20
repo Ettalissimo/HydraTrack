@@ -1,5 +1,9 @@
 package com.example.water_app;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,7 +14,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +39,7 @@ public class AddWaterActivity extends AppCompatActivity implements AdapterView.O
     private ArrayAdapter<String> adapter;
     private Button button;
     private EditText amountEditText;
-    private WaterConsumption water;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +56,7 @@ public class AddWaterActivity extends AppCompatActivity implements AdapterView.O
         containerSpinner.setOnItemSelectedListener(this);
 
         containerReference = FirebaseDatabase.getInstance().getReference("Containers");
-        amountReference = FirebaseDatabase.getInstance().getReference("WaterConsumption");
+        amountReference = FirebaseDatabase.getInstance().getReference("Users").child("User1"); // Assuming user ID is "User1"
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,11 +92,65 @@ public class AddWaterActivity extends AppCompatActivity implements AdapterView.O
         Container selectedContainer = containerList.get(selectedPosition);
         String currentDate = getCurrentDate();
 
-        water = new WaterConsumption(amount, selectedContainer.name, currentDate);
+        User.WaterRecord waterRecord = new User.WaterRecord(amount, selectedContainer.name, currentDate);
 
-        amountReference.push().setValue(water)
-                .addOnSuccessListener(aVoid -> Toast.makeText(AddWaterActivity.this, "Data inserted successfully", Toast.LENGTH_SHORT).show())
+        amountReference.child("waterConsumption").child(currentDate).push().setValue(waterRecord)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(AddWaterActivity.this, "Data inserted successfully", Toast.LENGTH_SHORT).show();
+                    checkMilestoneReached(amount);
+                })
                 .addOnFailureListener(e -> Toast.makeText(AddWaterActivity.this, "Failed to insert data", Toast.LENGTH_SHORT).show());
+    }
+
+    private void checkMilestoneReached(int amount) {
+        amountReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(User.class);
+                if (user != null) {
+                    int dailyWaterGoal = user.dailyWaterGoal;
+                    int consumedWater = user.getConsumedWaterForCurrentDate();
+
+                    double percentage = (double) consumedWater / dailyWaterGoal * 100;
+
+                    if (percentage == 25 || percentage == 50 || percentage == 75 ) {
+                        sendMilestoneNotification("You've reached " + percentage + "% of your daily water goal!");
+                    }else if (percentage == 100) sendMilestoneNotification("Congratulations! You've reached your daily water goal!");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(AddWaterActivity.this, "Failed to fetch user data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void sendMilestoneNotification(String message) {
+        String channelId = "milestone_channel_id";
+        String channelName = "Milestone Notifications";
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (notificationManager == null) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(notificationManager, channelId, channelName);
+        }
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.notifs_icon)
+                .setContentTitle("HydraTrack")
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+        int notificationId = 1001; // You can choose any unique id
+        notificationManager.notify(notificationId, builder.build());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void createNotificationChannel(NotificationManager notificationManager, String channelId, String channelName) {
+        NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
+        channel.setDescription("Notifications for milestone achievements");
+        notificationManager.createNotificationChannel(channel);
     }
 
     private String getCurrentDate() {
