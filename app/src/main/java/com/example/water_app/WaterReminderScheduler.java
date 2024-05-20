@@ -12,7 +12,7 @@ public class WaterReminderScheduler {
         // Create an alarm manager
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, WaterReminderReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         // Set the alarm to trigger every hour
         Calendar calendar = Calendar.getInstance();

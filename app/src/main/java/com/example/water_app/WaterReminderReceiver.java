@@ -39,7 +39,7 @@ public class WaterReminderReceiver extends BroadcastReceiver {
         // Create intent to launch MainActivity
         Intent mainIntent = new Intent(context, MainActivity.class);
         mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, mainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, mainIntent, PendingIntent.FLAG_IMMUTABLE);
         builder.setContentIntent(pendingIntent);
 
         // Show the notification
