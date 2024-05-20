@@ -143,7 +143,8 @@ public class AddWaterActivity extends AppCompatActivity implements AdapterView.O
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);
         int notificationId = 1001; // You can choose any unique id
-        notificationManager.notify(notificationId, builder.build());
+        notificationManager.notify(notificationId, builder.build());        MainActivity.unreadNotificationsCount++;
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

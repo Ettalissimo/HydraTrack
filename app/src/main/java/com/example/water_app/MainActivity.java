@@ -26,6 +26,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 1002;
+    private TextView notificationBadge;
+    public static int unreadNotificationsCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         timeTextView.setText(currentTime);
         WaterReminderScheduler.scheduleHourlyReminder(this);
         Button addButton = findViewById(R.id.button);
+        notificationBadge = findViewById(R.id.notif_badge);
+        updateNotificationBadge();
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,4 +55,130 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    public  void updateNotificationBadge(){
+        if(unreadNotificationsCount > 0){
+            notificationBadge.setText(String.valueOf(unreadNotificationsCount));
+            notificationBadge.setVisibility(View.VISIBLE);
+        }else notificationBadge.setVisibility(View.GONE);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
