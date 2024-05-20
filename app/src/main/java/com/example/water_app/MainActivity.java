@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddWaterActivity.class);
-                WaterReminderReceiver.sendNotification(MainActivity.this);
                 startActivity(intent);
             }
         });

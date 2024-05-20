@@ -59,7 +59,8 @@
         android:background="@drawable/round_btn_white"
         android:hint="Enter water amount"
         tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="398dp" />
+        tools:layout_editor_absoluteY="398dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView5"
@@ -86,7 +87,7 @@
         android:layout_margin="16dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/round_btn_white"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/button1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +95,7 @@
         app:layout_constraintVertical_bias="0.36" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button1"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
