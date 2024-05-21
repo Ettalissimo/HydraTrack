@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         suggestionsRef = FirebaseDatabase.getInstance().getReference("Suggestions");
 
         // Button to display suggestion
-        button = findViewById(R.id.suggestion);
+        button = findViewById(R.id.Sugg);
         button.setText("Suggestion");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
