@@ -35,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
 
     public static int unreadNotificationsCount = 0;
 
+
+    private Button button;
+    private MainActivity activity;
+
+    private int currentSuggestionIndex = 1; // Start from "sugg1"
+    // Firebase
+    private DatabaseReference suggestionsRef;
+    private ValueEventListener suggestionsListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,5 +66,95 @@ public class MainActivity extends AppCompatActivity {
        }
         }
 
+
+        //Suggestions
+        activity = this;
+
+        // Initialize Firebase Database Reference
+        suggestionsRef = FirebaseDatabase.getInstance().getReference("Suggestions");
+
+        // Button to display suggestion
+        button = findViewById(R.id.Sugg);
+        button.setText("Suggestion");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayNextSuggestion();
+            }
+        });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Attach Firebase Listener to retrieve suggestions
+        suggestionsListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // Handle data change
+                if (dataSnapshot.exists()) {
+                    // Display the first suggestion when data changes
+                    displayNextSuggestion();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error
+                Toast.makeText(activity, "Failed to load suggestions", Toast.LENGTH_SHORT).show();
+            }
+        };
+        suggestionsRef.addValueEventListener(suggestionsListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // Remove Firebase Listener when the activity is stopped
+        if (suggestionsListener != null) {
+            suggestionsRef.removeEventListener(suggestionsListener);
+        }
+    }
+
+    private void displayNextSuggestion() {
+        // Fetch and display the next suggestion from Firebase
+        String currentSuggestionKey = "sugg" + currentSuggestionIndex;
+        suggestionsRef.child(currentSuggestionKey).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String nextSuggestion = dataSnapshot.child("text").getValue(String.class);
+                    if (nextSuggestion != null) {
+                        Popup popup = new Popup(activity);
+                        popup.setTitle("SUGGESTION OF THE DAY");
+                        popup.setSubTitle(nextSuggestion);
+                        popup.getButton().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(getApplicationContext(), "Oui!", Toast.LENGTH_SHORT).show();
+                                popup.dismiss();
+                            }
+                        });
+                        popup.build();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error
+                Toast.makeText(activity, "Failed to load suggestions", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        // Increment the current suggestion index for the next click
+        currentSuggestionIndex++;
+        if (currentSuggestionIndex > 3) { // Define MAX_SUGGESTIONS as needed
+            currentSuggestionIndex = 1; // Reset index if it exceeds the maximum
+        }
+    }
+
+
+
+
 }
