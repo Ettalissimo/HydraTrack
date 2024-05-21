@@ -131,6 +131,9 @@ public class MainActivity extends AppCompatActivity {
                     // Handle click on profile item
                     startActivity(new Intent(MainActivity.this, DataForm.class));
                     return true;
+                } else if (itemId == R.id.profile){
+                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    return true;
                 }
                 return false; // Added missing return statement
             }

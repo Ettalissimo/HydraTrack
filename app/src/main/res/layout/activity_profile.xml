@@ -29,9 +29,10 @@
         android:layout_height="50dp"
         android:layout_margin="16dp"
         android:background="@drawable/round_btn_white"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="125dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:ignore="MissingConstraints" />
 
 
 
@@ -56,8 +57,8 @@
         android:layout_height="50dp"
         android:layout_margin="16dp"
         android:background="@drawable/round_btn_white"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="55dp"
         tools:layout_editor_absoluteY="269dp" />
 
     <TextView
