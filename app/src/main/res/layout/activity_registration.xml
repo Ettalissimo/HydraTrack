@@ -75,11 +75,11 @@
         android:visibility="gone" />
 
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/signupbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#302596be"
+        android:background="@drawable/round_btn"
         android:backgroundTint="@color/design_default_color_primary"
         android:elevation="30dp"
         android:text="Register"
