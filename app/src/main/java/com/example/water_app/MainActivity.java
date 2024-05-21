@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.TextureView;
 import android.view.View;
 import android.content.Intent;
@@ -16,6 +18,10 @@ import android.widget.TextView;
 import android.Manifest;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,10 +45,22 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private MainActivity activity;
 
+    private TextView usernameDisplay ;
+
     private int currentSuggestionIndex = 1; // Start from "sugg1"
     // Firebase
     private DatabaseReference suggestionsRef;
     private ValueEventListener suggestionsListener;
+
+    private FirebaseAuth mAuth ;
+
+    private FirebaseDatabase db ;
+
+    private String uid ;
+
+
+    BottomNavigationView bottomNavigationView;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,11 +71,40 @@ public class MainActivity extends AppCompatActivity {
         timeTextView.setText(currentTime);
         WaterReminderScheduler.scheduleHourlyReminder(this);
         Button addButton = findViewById(R.id.button);
+        FloatingActionButton floating = findViewById(R.id.floatingActionButton);
+
+
+        usernameDisplay = findViewById(R.id.textView3) ;
+
+        FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    uid = user.getUid();
+                    // Retrieve user data using the uid
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+
+
+
+        floating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayNextSuggestion();
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddWaterActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         if (Build.VERSION.SDK_INT >= 33) {
@@ -66,22 +113,29 @@ public class MainActivity extends AppCompatActivity {
        }
         }
 
-
         //Suggestions
         activity = this;
 
         // Initialize Firebase Database Reference
         suggestionsRef = FirebaseDatabase.getInstance().getReference("Suggestions");
-
-        // Button to display suggestion
-        button = findViewById(R.id.Sugg);
-        button.setText("Suggestion");
-        button.setOnClickListener(new View.OnClickListener() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                displayNextSuggestion();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.Home) {
+                    // Handle click on home item
+                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+                    return true;
+                } else if (itemId == R.id.settings) {
+                    // Handle click on profile item
+                    startActivity(new Intent(MainActivity.this, DataForm.class));
+                    return true;
+                }
+                return false; // Added missing return statement
             }
         });
+
     }
 
     @Override
@@ -153,8 +207,6 @@ public class MainActivity extends AppCompatActivity {
             currentSuggestionIndex = 1; // Reset index if it exceeds the maximum
         }
     }
-
-
 
 
 }
